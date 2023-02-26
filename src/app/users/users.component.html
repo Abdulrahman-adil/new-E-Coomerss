@@ -1,0 +1,31 @@
+<h2
+  class="user-header"
+  style="
+    text-align: center;
+    text-align: center;
+    background-color: #eee;
+    width: 200px;
+    margin: 15px AUTO;
+    border-radius: 10px;
+  "
+>
+  Users
+</h2>
+
+<div
+  class="container d-flex"
+  style="
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 50px;
+  "
+>
+  <div class="card" style="width: 20rem" *ngFor="let item of users">
+    <div class="card-body">
+      <p class="card-text">{{ item.name }} : {{ item.username }}</p>
+
+      <p class="card-text">{{ item.email }}</p>
+    </div>
+  </div>
+</div>
