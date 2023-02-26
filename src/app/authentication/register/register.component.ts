@@ -11,6 +11,7 @@ export class RegisterComponent {
   userModel:User=  new User('','','','','')
   socials= ["facebook","twitter","google"];
   socialHasError:boolean = false
+  isDisabled:boolean = true
   // name:any = "abdo"
   constructor(private userService:UserService){}
   validateSocial(socialValue:any){

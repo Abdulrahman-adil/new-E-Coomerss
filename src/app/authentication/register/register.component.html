@@ -128,12 +128,23 @@
         please select your social
       </div>
     </div>
-    <input
+    <!-- <input
       type="submit"
-      class="btn btn-success"
+      class="btn btn-danger"
       value="Submit"
       name="submit"
-      [disabled]="userForm.form.invalid || socialHasError"
-    />
+      md-raised-button
+      [disabled]="userForm.form.invalid || (socialHasError && isDisabled)"
+      [class.my-class]="isDisabled"
+    /> -->
+    <button
+      md-raised-button
+      [disabled]="userForm.invalid"
+      [style.color]="'white'"
+      [style.background-color]="userForm.invalid ? 'red' : 'green'"
+      [disabled]="userForm.form.invalid || (socialHasError && isDisabled)"
+    >
+      Submit
+    </button>
   </form>
 </div>
