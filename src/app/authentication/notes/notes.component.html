@@ -25,7 +25,7 @@
     </div>
     <div class="form-group">
       <select class="custom-select select" formControlName="selectProduct">
-        <option value="default">products...</option>
+        <option selected [ngValue]="null" value="default">products...</option>
         <option *ngFor="let product of products">
           {{ product }}
         </option>
@@ -33,14 +33,26 @@
       <br />
       <!-- <div class="alert alert-danger">please select your social</div> -->
     </div>
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        formControlName="input"
+        [class.is-invalid]="input?.touched && input?.invalid"
+      />
+      <small class="text-danger" *ngIf="input?.touched && input?.invalid"
+        >required(write discount value in percent)</small
+      >
+    </div>
     <div class="form-check mb-3">
       <input
         type="checkbox"
         class="form-check-input"
         formControlName="hasDiscount"
+        (click)="setValid()"
       />
       <label class="form-check-lable"
-        >Does this product containd discount</label
+        >Does this product contained discount</label
       >
     </div>
   </form>

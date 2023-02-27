@@ -20,6 +20,7 @@ registerAdmin=this.formBuild.group(
   {
     uName:['',[Validators.required,ForbiddenName]],
     selectProduct:[''],
+    input:[''],
     hasDiscount:[false]
   }
 )
@@ -27,11 +28,25 @@ registerAdmin=this.formBuild.group(
 ngOnInit(): void {
 
 }
+setValid(){
+  this.registerAdmin.get('hasDiscount')?.valueChanges.subscribe(checkedvalue => {
+    if(checkedvalue) {
+      this.input?.setValidators(Validators.required)
+    }else{
+      this.input?.clearValidators();
+    }
+    this.input?.updateValueAndValidity();
+  } )
+}
 get uName(){
 return this.registerAdmin.get('uName')
 }
 get selectProduct(){
   return this.registerAdmin.get('selectProduct')
   }
+
+  get input(){
+    return this.registerAdmin.get('input')
+    }
 
 }
