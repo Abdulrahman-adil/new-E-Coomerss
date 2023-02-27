@@ -1,6 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './authentication/login/login.component';
+import { NotesComponent } from './authentication/notes/notes.component';
 import { RegisterComponent } from './authentication/register/register.component';
 import { CartsComponent } from './carts/carts.component';
 import { CommentsComponent } from './comments/comments.component';
@@ -31,13 +32,18 @@ const routes: Routes = [
 
   /*Start posts paths*/
   {path:"posts",component:PostsComponent}, // all post
-  {path:"post-detail",component:PostDetailsComponent}, // post details
-  {path:"posts/:id/comment",component:CommentsComponent},
+  {path:"post-detail/:id",component:PostDetailsComponent,
+ children:[
+  {path:'comments',component:CommentsComponent}
+ ]
+}, // post details
+  // {path:"posts/:id/comment",component:CommentsComponent},
   /*end posts paths*/
 
     /*Start authentication  paths*/
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
+  {path:"notes",component:NotesComponent},
   // {path:'auth',loadChildren:()=>import('./authentication/authentication.module').then(m=>m.AuthModule)},
   // {path:"**", redirectTo:"/home", pathMatch: "full"},
     /*Start authentication  paths*/

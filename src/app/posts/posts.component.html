@@ -27,7 +27,11 @@
       <p class="card-text">{{ item.title }}</p>
       <p class="card-text">{{ item.body }}</p>
     </div>
-    <button class="btn btn-success" routerLink="/posts/{{ item.id }}/comment">
+    <button
+      class="btn btn-success"
+      (click)="goToComments()"
+      routerLink="/comments/{{ item.id }}"
+    >
       view post comments
     </button>
   </div>

@@ -24,6 +24,8 @@ import { PostDetailsComponent } from './post-details/post-details.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
 import { NgModel } from '@angular/forms';
+import { SelectComponent } from './shared/components/select/select.component';
+import { NotesComponent } from './authentication/notes/notes.component';
 
 
 @NgModule({
@@ -45,6 +47,8 @@ import { NgModel } from '@angular/forms';
     PostDetailsComponent,
     LoginComponent,
     RegisterComponent,
+    NotesComponent,
+    SelectComponent,
 
   ],
   imports: [

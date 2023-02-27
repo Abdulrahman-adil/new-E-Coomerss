@@ -1,5 +1,6 @@
 import { Component ,OnInit} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
+import {  Routes,Router } from '@angular/router';
 import { PostsService } from '../posts-services/posts.service';
 
 @Component({
@@ -8,12 +9,10 @@ import { PostsService } from '../posts-services/posts.service';
   styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent implements OnInit{
-  // id:any;
-  // data:any = {};
-  //============================
+
   posts: any=[];
   errorMessage: any;
-  constructor(private postsServise:PostsService,private activRoute:ActivatedRoute){
+  constructor(private router:Router,private postsService:PostsService,private activeRoute:ActivatedRoute){
     // this.id = this.activRoute.snapshot.paramMap.get("id")
     // console.log(this.id)
   }
@@ -21,14 +20,17 @@ export class PostsComponent implements OnInit{
     this.getPosts();
     // this.getComment();
 }
-
 getPosts(){
-  this.postsServise.getPostsDetails().subscribe({
+  this.postsService.getPostsDetails().subscribe({
     next:data=>this.posts= data,
     error:error=> this.errorMessage= error
   })
 }
 
+goToComments(){
+  // go to comments page
+ this.router.navigate(['/comments'],{relativeTo:this.activeRoute})
+}
 // getComment(){
 //   this.postsServise.getCommentByID(this.id).subscribe(res =>{
 //     this.data = res

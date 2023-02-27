@@ -15,11 +15,11 @@ export class CommentsComponent implements OnInit{
     console.log(this.id)
   }
   ngOnInit(): void {
-    this.getComment();
+    // this.getComment();
   }
-  getComment(){
-    this.service.getCommentByID(this.id).subscribe(res =>{
-      this.data = res
-    })
-  }
+  // getComment(){
+  //   this.service.getCommentByID(this.id).subscribe(res =>{
+  //     this.data = res
+  //   })
+  // }
 }

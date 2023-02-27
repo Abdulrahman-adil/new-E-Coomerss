@@ -15,7 +15,7 @@ export class ProductsComponent implements OnInit {
   clientName : string = "";
   isPurshased : boolean= true;
   discount : DIscountOffers;
-  loding:boolean = false;
+  loading:boolean = false;
 //========properties===========//
 constructor(private productServesfromAPI:ProductServiceService,private router: Router){
  this.discount = DIscountOffers.noDiscount
@@ -26,21 +26,20 @@ ngOnInit(): void {
   this.getCategoryFromAPI()
 }
 getproductsFromAPI(){
-  this.loding = true;
-  this.productServesfromAPI.getTheAllProductFromIPI().subscribe(
-{
-  next:data=>this.productfromAPI= data,
-
-  error:error=> this.errorMessage= error
-
+  this.loading = true;
+  this.productServesfromAPI.getTheAllProductFromIPI().subscribe((data:any) =>
+  {
+    this.productfromAPI= data
+    this.loading = false
+  })
 }
-  )
-  }
+
 getCategoryFromAPI(){
+  this.loading = true;
   this.productServesfromAPI.getAllCategoreis().subscribe((res:any) =>
 {
-console.log(res);
 this.CatigoresfromAPI = res
+this.loading = false
 })
 }
 
@@ -56,13 +55,14 @@ this.CatigoresfromAPI = res
     }
 
     getProductsCat(keyword:string){
-      this.productServesfromAPI.getproductsByCategoreis(keyword).subscribe({
-        next:data => this.productfromAPI = data
+      this.loading = true;
+      this.productServesfromAPI.getproductsByCategoreis(keyword).subscribe((res:any) => {
+        // next:data => this.productfromAPI = data
+        this.productfromAPI = res
+        this.loading = false
       })
 
     }
-
-
     redirect() {
       this.router.navigate(['products']);
   }

@@ -1,30 +1,31 @@
+<!--Reactive forms -->
+
 <div class="container">
-  <form class="form-login" #userForm="ngForm" (ngSubmit)="submitData()">
+  <form class="form-login" (ngSubmit)="submitData()" [formGroup]="registration">
     <!--Start inputUserName -->
     <div class="form-group">
       <input
-        [(ngModel)]="userModel.username"
-        #username="ngModel"
-        name="UserName"
+        formControlName="userName"
         type="text"
         class="form-control"
-        required
-        [class.is-invalid]="username.invalid && username.touched"
-        pattern="^[A-Z]+[a-z]+$"
+        [class.is-invalid]="userName?.invalid && userName?.touched"
         placeholder="User Name"
       />
       <div
         class="alert alert-danger"
-        *ngIf="username.errors && username.touched"
+        role="alert"
+        *ngIf="userName?.invalid && userName?.touched"
       >
-        <small class="text-danger" *ngIf="username.errors['required']"
-          >userName is required</small
-        >
+        <div class="text-danger" *ngIf="userName?.errors?.['required']">
+          userName is required
+        </div>
         <br />
-        <small class="text-danger" *ngIf="username.errors['pattern']"
-          >the user name must also contains only capital and small
-          characters</small
-        >
+        <div class="text-danger" *ngIf="userName?.errors?.['pattern']">
+          the user name must also contains only capital and small characters
+        </div>
+        <div class="text-danger" *ngIf="userName?.errors?.['minLength']">
+          the user name must at least 5 characters
+        </div>
       </div>
     </div>
     <!--End  inputUserName -->
@@ -32,91 +33,73 @@
     <div class="form-group">
       <input
         type="email"
-        name="email"
+        formControlName="email"
         required
         pattern="^\w+([-_.])*@\w+([-.]\w+)*\.\w+([-.]\w+)*$"
-        [class.is-invalid]="email.invalid && email.touched"
+        [class.is-invalid]="email?.errors && email?.touched"
         placeholder="Email"
-        [(ngModel)]="userModel.email"
-        #email="ngModel"
         class="form-control"
       />
-      <div class="alert alert-danger" *ngIf="email.errors && email.touched">
-        <small class="text-danger" *ngIf="email.errors['required']"
+      <div class="alert alert-danger" *ngIf="email?.errors && email?.touched">
+        <small class="text-danger" *ngIf="email?.errors?.['required']"
           >Email is required</small
         >
         <br />
-        <small class="text-danger" *ngIf="email.errors['pattern']"
+        <small class="text-danger" *ngIf="email?.errors?.['pattern']"
           >the Email must contains @ ex:(aaa@bb.com)</small
         >
       </div>
     </div>
     <!--End inputEmail -->
+
     <!--Start inputPassword -->
     <div class="form-group">
       <input
         type="password"
-        name="password"
+        formControlName="password"
         required
-        [class.is-invalid]="password.invalid && password.touched"
+        [class.is-invalid]="password?.invalid && password?.touched"
         placeholder="Password"
-        [(ngModel)]="userModel.password"
-        #password="ngModel"
         class="form-control"
-        minlength="5"
-        maxlength="20"
       />
       <div
         class="alert alert-danger"
-        *ngIf="password.errors && password.touched"
+        *ngIf="password?.errors && password?.touched"
       >
-        <small class="text-danger" *ngIf="password.errors['required']"
+        <small class="text-danger" *ngIf="password?.errors?.['required']"
           >Password is required</small
         >
         <br />
-        <small class="text-danger" *ngIf="password.errors['minlength']"
+        <small class="text-danger" *ngIf="password?.errors?.['minlength']"
           >Password Must be minimum at least 5 digit</small
         >
-        <small class="text-danger" *ngIf="password.errors['maxlength']"
+        <small class="text-danger" *ngIf="password?.errors?.['maxlength']"
           >Password Must be maxmum at least 5 digit</small
         >
       </div>
     </div>
+
     <!--End inputPassword -->
     <!--Start confirmPassword -->
     <div class="form-group">
       <input
         type="password"
-        name="confirmPassword"
+        formControlName="confirmPassword"
         class="form-control"
-        required
-        pattern="{{ userModel.password }}"
-        [class.is-invalid]="confirmPassword.invalid && confirmPassword.touched"
         placeholder="Confirm Password"
-        [(ngModel)]="userModel.confirmPassword"
-        #confirmPassword="ngModel"
       />
-      <div
+      <small
         class="alert alert-danger"
-        *ngIf="confirmPassword.errors && confirmPassword.touched"
+        *ngIf="registration.errors?.['misMatch']"
+        >password and confirm password not match</small
       >
-        <small class="text-danger" *ngIf="confirmPassword.errors['required']"
-          >confirm Password is required</small
-        >
-      </div>
     </div>
     <!--ENd confirmPassword -->
-
     <div class="form-group">
       <select
         class="custom-select select"
-        name="ddSocial"
-        required
-        [class.is-invalid]="social.invalid && social.touched"
-        [(ngModel)]="userModel.social"
-        #social="ngModel"
-        (blur)="validateSocial(social.value)"
-        (change)="validateSocial(social.value)"
+        formControlName="selectProduct"
+        name="select"
       >
         <option value="default">where you hear about us ...</option>
         <option *ngFor="let social of socials">
@@ -124,11 +107,22 @@
         </option>
       </select>
       <br />
-      <div class="alert alert-danger" *ngIf="social.touched && socialHasError">
+      <!-- <div class="alert alert-danger" *ngIf="selectProduct?.touched">
         please select your social
-      </div>
+      </div> -->
     </div>
-    <!-- <input
+    <button
+      md-raised-button
+      [disabled]="registration.invalid"
+      [style.color]="'white'"
+      [style.background-color]="registration.invalid ? 'green' : 'green'"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+
+<!-- <input
       type="submit"
       class="btn btn-danger"
       value="Submit"
@@ -137,14 +131,3 @@
       [disabled]="userForm.form.invalid || (socialHasError && isDisabled)"
       [class.my-class]="isDisabled"
     /> -->
-    <button
-      md-raised-button
-      [disabled]="userForm.invalid"
-      [style.color]="'white'"
-      [style.background-color]="userForm.invalid ? 'red' : 'green'"
-      [disabled]="userForm.form.invalid || (socialHasError && isDisabled)"
-    >
-      Submit
-    </button>
-  </form>
-</div>

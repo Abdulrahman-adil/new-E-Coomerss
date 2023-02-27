@@ -1,17 +1,9 @@
 <div class="my-2 w-25">
   <label class="my-1">Categories :</label>
-  <select class="form-control" (change)="filterCat($event)">
-    <option value="all" selected (click)="redirect()">All</option>
-    <option value="{{ option }}" *ngFor="let option of CatigoresfromAPI">
-      {{ option }}
-    </option>
-  </select>
+  <app-select>[data]='categories'</app-select>
 </div>
-<!-- <div class="discount d-flex gap-2">
-  <button class="btn btn-danger">Product With Discount</button>
-  <button class="btn btn-danger">Product Without Discount</button>
-</div> -->
-<div class="products">
+
+<div class="products" *ngIf="!loading">
   <div class="container d-flex">
     <div
       class="card"
@@ -33,7 +25,7 @@
           align-items: center;
         "
       >
-        <button class="btn btn-success" style="">Add to Cart</button>
+        <button class="btn btn-success">Add to Cart</button>
         <span style="background: aquamarine; padding: 5px; border-radius: 5px">
           {{ item.price }}$
         </span>
@@ -41,7 +33,7 @@
     </div>
   </div>
 
-  <div class="text-center w-100">
+  <div class="text-center w-100" *ngIf="loading">
     <app-spinner></app-spinner>
   </div>
 </div>

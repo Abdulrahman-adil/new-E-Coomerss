@@ -14,12 +14,12 @@ export class PostsService {
     return this.http.get('https://jsonplaceholder.typicode.com/posts')
   }
   getPostByID(id:any){
-    return this.http.get('https://jsonplaceholder.typicode.com/posts' + id)
+    return this.http.get('https://jsonplaceholder.typicode.com/posts/' + id)
   }
 
-  getCommentByID(id:any){
-    return this.http.get('https://jsonplaceholder.typicode.com/posts' + id + '/comments')
-  }
+  // getCommentByID(id:any){
+  //   return this.http.get('https://jsonplaceholder.typicode.com/posts' + id + '/comments')
+  // }
 
   // getUserDetails():Observable<iUser[]>
   // {

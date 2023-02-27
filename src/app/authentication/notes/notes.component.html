@@ -1,0 +1,47 @@
+<div class="container">
+  <form class="form-login" [formGroup]="registerAdmin">
+    <!--Start inputUserName -->
+    <div class="form-group">
+      <input
+        formControlName="uName"
+        type="text"
+        class="form-control"
+        [class.is-invalid]="uName?.invalid && uName?.touched"
+        placeholder="User Name"
+      />
+      <div
+        class="alert alert-danger"
+        role="alert"
+        *ngIf="uName?.invalid && uName?.touched"
+      >
+        <div class="text-danger" *ngIf="uName?.errors?.['required']">
+          userName is required
+        </div>
+        <br />
+        <div class="text-danger" *ngIf="uName?.errors?.['forbiddenName']">
+          {{uName?.errors?.['forbiddenName'].value}} is not allowed
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <select class="custom-select select" formControlName="selectProduct">
+        <option value="default">products...</option>
+        <option *ngFor="let product of products">
+          {{ product }}
+        </option>
+      </select>
+      <br />
+      <!-- <div class="alert alert-danger">please select your social</div> -->
+    </div>
+    <div class="form-check mb-3">
+      <input
+        type="checkbox"
+        class="form-check-input"
+        formControlName="hasDiscount"
+      />
+      <label class="form-check-lable"
+        >Does this product containd discount</label
+      >
+    </div>
+  </form>
+</div>
