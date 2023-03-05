@@ -7,15 +7,15 @@ export class ProductServiceService {
 
   constructor(private _http:HttpClient) { }
 
-  getTheAllProductFromIPI(){
+  getAllProduct(){
     return this._http.get('https://fakestoreapi.com/products')
   }
 
-  getAllCategoreis(){
+  getAllCategories(){
     return this._http.get('https://fakestoreapi.com/products/categories')
   }
 
-  getproductsByCategoreis(keyword:string){
+  getSpecificCategory(keyword:string){
     return this._http.get('https://fakestoreapi.com/products/category/' + keyword)
   }
 

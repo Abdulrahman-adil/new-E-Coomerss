@@ -1,35 +1,22 @@
 <div class="my-2 w-25">
-  <label class="my-1">Categories :</label>
-  <app-select>[data]='categories'</app-select>
+  <app-select
+    [data]="Catagories"
+    (selectedData)="filterCat($event)"
+  ></app-select>
 </div>
 
 <div class="products" *ngIf="!loading">
-  <div class="container d-flex">
+  <div class="d-f">
     <div
-      class="card"
-      style="width: 18rem"
-      *ngFor="let item of productfromAPI"
+      class="box"
+      *ngFor="let item of products"
       routerLink="/details/{{ item.id }}"
     >
-      <img [src]="item.image" class="card-img-top" alt="..." />
-      <div class="card-body">
-        <p>{{ item.title }}</p>
-        <p>{{ item.category }}</p>
-        <p>{{ discount }}</p>
-      </div>
-      <div
-        class="info d-flex"
-        style="
-          justify-content: space-between;
-          padding: 10px;
-          align-items: center;
-        "
-      >
-        <button class="btn btn-success">Add to Cart</button>
-        <span style="background: aquamarine; padding: 5px; border-radius: 5px">
-          {{ item.price }}$
-        </span>
-      </div>
+      <app-products-form-shared
+        [data]="item"
+        (item)="addToCart($event)"
+      ></app-products-form-shared>
+      <!-- this child-->
     </div>
   </div>
 

@@ -26,6 +26,7 @@ import { RegisterComponent } from './authentication/register/register.component'
 import { NgModel } from '@angular/forms';
 import { SelectComponent } from './shared/components/select/select.component';
 import { NotesComponent } from './authentication/notes/notes.component';
+import { ProductsFormSharedComponent } from './shared/components/select/products-form-shared/products-form-shared.component';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { NotesComponent } from './authentication/notes/notes.component';
     RegisterComponent,
     NotesComponent,
     SelectComponent,
+    ProductsFormSharedComponent,
 
   ],
   imports: [

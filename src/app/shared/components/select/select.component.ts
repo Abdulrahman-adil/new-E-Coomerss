@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-select',
@@ -6,9 +6,10 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./select.component.scss']
 })
 export class SelectComponent {
- @Input() data:any[] = []
-  detectChanges(event:any){
-
+ @Input() data:any[] = [] // from child to parent
+ @Output() selectedData = new EventEmitter()
+ detectChanges(event:any){
+  this.selectedData.emit(event)
   }
-  redirect(){}
+  // redirect(){}
 }
